@@ -5,7 +5,9 @@ import { useEffect, useState } from 'react';
 import Recipes from './components/Recipes';
 
 const SearchBox = styled(Box)({
+  width:"100%",
   display: "flex",
+  justifyContent:"center",
   gap: "10px",
   padding: "30px",
   borderBottom: "1px solid gray"
@@ -57,7 +59,7 @@ function App() {
       <Box bgcolor={"background.default"} width="100%" color={"text.primary"}>
         <Container>
           <Stack direction={"column"} alignItems="center" sx={{ paddingTop: "100px" }}>
-            <Typography variant='h4'>Food Recipe App 🍕🍔</Typography>
+            <Typography variant='h4' textAlign={"center"}>Food Recipe App 🍕🍔</Typography>
             <SearchBox mb={4}>
               <Tooltip title="Mode">
                 <IconButton onClick={darkMode}>
@@ -67,10 +69,11 @@ function App() {
 
               {/* Search Bar */}
               <InputBase placeholder='Search...'
-                sx={{ bgcolor: "#f4f4f4", border: "1px solid gray", borderRadius: "5px", padding: "0px 15px", color: "black" }}
+                sx={{ width:"50%", bgcolor: "#f4f4f4", border: "1px solid gray", borderRadius: "5px", padding: "0px 15px", color: "black" }}
                 onChange={e => inputHandle(e)}
               />
-              <Button variant="contained" startIcon={<Search />} onClick={getRecipes}>Search</Button>
+              <Button variant="contained" color='success' sx={{display:{xs:"none",sm:"flex"}}} startIcon={<Search />} onClick={getRecipes}>Search</Button>
+              <Button variant="contained" color='success' sx={{display:{xs:"flex",sm:"none"}}} onClick={getRecipes}><Search /></Button>
             </SearchBox>
           </Stack>
 
