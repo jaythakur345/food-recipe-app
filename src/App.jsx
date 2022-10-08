@@ -5,11 +5,24 @@ import { useEffect, useState } from 'react';
 import Recipes from './components/Recipes';
 
 const SearchBox = styled(Box)({
-  width:"100%",
+  width: "100%",
   display: "flex",
-  justifyContent:"center",
+  justifyContent: "center",
   gap: "10px",
   padding: "30px",
+  
+})
+
+const StyledBox = styled(Box)({
+  display:"flex",
+  flexDirection:"column",
+  justifyContent:"center",
+  paddingTop:"30px",
+  width: "100%",
+  height:"30vh",
+  position:"sticky",
+  top:"0",
+  zIndex:"999",
   borderBottom: "1px solid gray"
 })
 function App() {
@@ -58,24 +71,26 @@ function App() {
     <ThemeProvider theme={darkTheme}>
       <Box bgcolor={"background.default"} width="100%" color={"text.primary"}>
         <Container>
-          <Stack direction={"column"} alignItems="center" sx={{ paddingTop: "100px" }}>
-            <Typography variant='h4' textAlign={"center"}>Food Recipe App 🍕🍔</Typography>
-            <SearchBox mb={4}>
-              <Tooltip title="Mode">
-                <IconButton onClick={darkMode}>
-                  {mode === "light" ? <ModeNight color={'text.primary'} /> : <WbSunny color={'text.primary'} />}
-                </IconButton>
-              </Tooltip>
+          <StyledBox bgcolor={"background.default"}>
+            <Stack direction={"column"} alignItems="center" >
+              <Typography variant='h4' textAlign={"center"}>Food Recipe App 🍕🍔</Typography>
+              <SearchBox mb={4}>
+                <Tooltip title="Mode">
+                  <IconButton onClick={darkMode}>
+                    {mode === "light" ? <ModeNight color={'text.primary'} /> : <WbSunny color={'text.primary'} />}
+                  </IconButton>
+                </Tooltip>
 
-              {/* Search Bar */}
-              <InputBase placeholder='Search...'
-                sx={{ width:"50%", bgcolor: "#f4f4f4", border: "1px solid gray", borderRadius: "5px", padding: "0px 15px", color: "black" }}
-                onChange={e => inputHandle(e)}
-              />
-              <Button variant="contained" color='success' sx={{display:{xs:"none",sm:"flex"}}} startIcon={<Search />} onClick={getRecipes}>Search</Button>
-              <Button variant="contained" color='success' sx={{display:{xs:"flex",sm:"none"}}} onClick={getRecipes}><Search /></Button>
-            </SearchBox>
-          </Stack>
+                {/* Search Bar */}
+                <InputBase placeholder='Search...'
+                  sx={{ width: "50%", bgcolor: "#f4f4f4", border: "1px solid gray", borderRadius: "5px", padding: "0px 15px", color: "black" }}
+                  onChange={e => inputHandle(e)}
+                />
+                <Button variant="contained" color='success' sx={{ display: { xs: "none", sm: "flex" } }} startIcon={<Search />} onClick={getRecipes}>Search</Button>
+                <Button variant="contained" color='success' sx={{ display: { xs: "flex", sm: "none" } }} onClick={getRecipes}><Search /></Button>
+              </SearchBox>
+            </Stack>
+          </StyledBox>
 
           {/* Recipes Cards */}
           <Recipes recipes={recipes} />
